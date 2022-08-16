@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    dynamic:
+      primary: master
+      strict: false
+      datasource:
+
+        master:
+          type: com.alibaba.druid.pool.DruidDataSource
+          username: light
+          password: 12345
+          url: jdbc:mysql://180.76.179.65/newDay
+        note:
+          type: com.alibaba.druid.pool.DruidDataSource
+          username: light
+          password: 12345
+          url: jdbc:mysql://180.76.179.65/cloudnote
+
