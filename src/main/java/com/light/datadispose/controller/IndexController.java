@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @ShowFunAble
 @RequestMapping("asdas/")
-public class IndexController extends NewDayUserController {
+public class IndexController{
 
 
     @GetMapping("index")

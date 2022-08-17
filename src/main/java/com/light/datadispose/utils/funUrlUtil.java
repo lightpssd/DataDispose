@@ -26,6 +26,7 @@ public class funUrlUtil {
             RequestMapping annotation = aClass.getAnnotation(RequestMapping.class);
             //获取所有方法对应的url
             List<String> subUrls = Arrays.stream(aClass.getMethods()).mapMulti((Method method, Consumer<String> c) -> {
+
                 var ra = method.getAnnotation(RequestMapping.class);
                 if (ra != null && Arrays.stream(ra.method()).anyMatch(requestMethod -> requestMethod == RequestMethod.GET)) {
 
@@ -42,9 +43,11 @@ public class funUrlUtil {
                         c.accept(s);
                     }
                     if (rg.value().length == 0) {
+
                         c.accept("");
                     }
                 }
+
             }).toList();
             //如果有根url
             if (annotation!=null){
@@ -58,7 +61,7 @@ public class funUrlUtil {
                 }
             }
             return subUrls.stream();
-        }).peek(System.out::println).toList();
+        }).toList();
 
     }
 
