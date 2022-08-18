@@ -26,7 +26,6 @@ class DataDisposeApplicationTests {
         authGroup.setId(2);
         authGroup.setName("asd");
         authGroupMapper.insert(authGroup);
-
     }
 
 }

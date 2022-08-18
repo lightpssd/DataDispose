@@ -69,6 +69,13 @@
             <artifactId>reflections</artifactId>
             <version>0.10.2</version>
         </dependency>
+        <dependency>
+            <groupId>openDriver</groupId>
+            <artifactId>openDriver</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/openedge.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
@@ -76,6 +83,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
             </plugin>
         </plugins>
     </build>

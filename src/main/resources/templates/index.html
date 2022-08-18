@@ -1,10 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<style>
+    .main {
+        float: left;
+
+    }
+
+    .group {
+        float: left;
+        width: 360px;
+        margin: 10px;
+        border: 2px solid cadetblue;
+        box-shadow: 4px 4px rgb(50, 111, 118);
+        background-color: rgb(178, 221, 235);
+
+    }
+
+    .title {
+        text-align: center;
+    }
+
+    .bt {
+        float: left;
+        margin: 10px;
+        position: relative;
+
+    }
+
+    button {
+        width: 100px;
+        height: 100px;
+    }
+
+    .bt-info {
+        position: absolute;
+        width: 200px;
+        height: 100px;
+        top: 70px;
+        left: 70px;
+        z-index: 100;
+        opacity: 0;
+
+        transition: opacity 0.5s;
+        transition-timing-function: ease;
+
+
+    }
+
+    .bt:hover > .bt-info {
+        opacity: 1;
+    }
+
+    :not(.bt:hover) > .bt-info {
+        opacity: 0;
+    }
+</style>
 <body>
-<h1>您好!</h1>
+<div class="main">
+    <div class="group" th:each="item:${funlist}">
+        <div class="title">
+            <div th:text="${item.name}"></div>
+            <div th:text="${item.description}"></div>
+        </div>
+        <div>
+            <div class="bt" th:each="i:${item.showFuns}">
+                <button th:onclick="doFun([[${i.url}]])" th:text="${i.url}"></button>
+                <div class="bt-info" th:text="${i.description}"></div>
+            </div>
+        </div>
+    </div>
+<!--    <div class="group">-->
+<!--        <div class="title">-->
+<!--            <div>name</div>-->
+<!--            <div>描述</div>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <div class="bt">-->
+<!--                <button>name</button>-->
+<!--                <div class="bt-info">描述叔叔</div>-->
+<!--            </div>-->
+<!--            <div class="bt">-->
+<!--                <button>name</button>-->
+<!--            </div>-->
+<!--            <div class="bt">-->
+<!--                <button>name</button>-->
+<!--            </div>-->
+<!--            <div class="bt">-->
+<!--                <button>name</button>-->
+<!--            </div>-->
+<!--            <div class="bt">-->
+<!--                <button>name</button>-->
+<!--            </div>-->
+<!--            <div class="bt">-->
+<!--                <button>name</button>-->
+<!--            </div>-->
+<!--            <div class="bt">-->
+<!--                <button>name</button>-->
+<!--            </div>-->
+<!--            <div class="bt">-->
+<!--                <button>name</button>-->
+<!--            </div>-->
+<!--            <div class="bt">-->
+<!--                <button>name</button>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+<script>
+    function doFun(url){
+
+    }
+</script>
 </body>
 </html>

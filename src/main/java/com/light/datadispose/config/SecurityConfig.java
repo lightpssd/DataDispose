@@ -21,7 +21,7 @@ import java.util.function.Function;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-@Configuration
+//@Configuration
 public class SecurityConfig{
 
 

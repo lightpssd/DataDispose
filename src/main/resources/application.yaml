@@ -16,3 +16,6 @@ spring:
           password: 12345
           url: jdbc:mysql://180.76.179.65/cloudnote
 
+
+
+
