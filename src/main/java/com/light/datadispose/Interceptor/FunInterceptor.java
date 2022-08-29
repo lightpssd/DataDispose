@@ -6,7 +6,12 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
-@Component
+
+//@Component
+@Deprecated
+/**
+ * 弃用的拦截器
+ */
 public class FunInterceptor implements HandlerInterceptor {
     /**
      * 访问控制器方法前执行

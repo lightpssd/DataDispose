@@ -4,7 +4,6 @@ spring:
       primary: master
       strict: false
       datasource:
-
         master:
           type: com.alibaba.druid.pool.DruidDataSource
           username: light
@@ -17,6 +16,12 @@ spring:
           url: jdbc:mysql://180.76.179.65/cloudnote
   mvc:
     static-path-pattern: /static/**
+mybatis-plus:
+  mapper-locations: ["classpath*:/mapper/**/*.xml"]
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
 
-
-
+logging:
+  file:
+    path: log
+debug: false

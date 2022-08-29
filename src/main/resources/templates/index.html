@@ -59,62 +59,92 @@
     :not(.bt:hover) > .bt-info {
         opacity: 0;
     }
+    .right{
+        text-align: center;
+        float: right;
+        width: 400px;
+        overflow-x: scroll;
+        background-color:aquamarine;
+    }
 </style>
 <body>
-<div class="main">
-    <div class="group" th:each="item:${funlist}">
-        <div class="title">
-            <div th:text="${item.name}"></div>
-            <div th:text="${item.description}"></div>
-        </div>
-        <div>
-            <div class="bt" th:each="i:${item.showFuns}">
-                <button th:onclick="doFun([[${i.url}]])" th:text="${i.url}"></button>
-                <div class="bt-info" th:text="${i.description}"></div>
+<div class="left">
+    <div class="main">
+        <div class="group" th:each="item:${funlist}">
+            <div class="title">
+                <div th:text="${item.name}"></div>
+                <div th:text="${item.description}"></div>
+            </div>
+            <div>
+                <div class="bt" th:each="i:${item.showFuns}">
+                    <button th:onclick="doFun([[${i.url}]])" th:text="${i.name}"></button>
+                    <div class="bt-info" th:text="${i.description}"></div>
+                </div>
             </div>
         </div>
+    <!--    <div class="group">-->
+    <!--        <div class="title">-->
+    <!--            <div>name</div>-->
+    <!--            <div>描述</div>-->
+    <!--        </div>-->
+    <!--        <div>-->
+    <!--            <div class="bt">-->
+    <!--                <button>name</button>-->
+    <!--                <div class="bt-info">描述叔叔</div>-->
+    <!--            </div>-->
+    <!--            <div class="bt">-->
+    <!--                <button>name</button>-->
+    <!--            </div>-->
+    <!--            <div class="bt">-->
+    <!--                <button>name</button>-->
+    <!--            </div>-->
+    <!--            <div class="bt">-->
+    <!--                <button>name</button>-->
+    <!--            </div>-->
+    <!--            <div class="bt">-->
+    <!--                <button>name</button>-->
+    <!--            </div>-->
+    <!--            <div class="bt">-->
+    <!--                <button>name</button>-->
+    <!--            </div>-->
+    <!--            <div class="bt">-->
+    <!--                <button>name</button>-->
+    <!--            </div>-->
+    <!--            <div class="bt">-->
+    <!--                <button>name</button>-->
+    <!--            </div>-->
+    <!--            <div class="bt">-->
+    <!--                <button>name</button>-->
+    <!--            </div>-->
+    <!--        </div>-->
     </div>
-<!--    <div class="group">-->
-<!--        <div class="title">-->
-<!--            <div>name</div>-->
-<!--            <div>描述</div>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <div class="bt">-->
-<!--                <button>name</button>-->
-<!--                <div class="bt-info">描述叔叔</div>-->
-<!--            </div>-->
-<!--            <div class="bt">-->
-<!--                <button>name</button>-->
-<!--            </div>-->
-<!--            <div class="bt">-->
-<!--                <button>name</button>-->
-<!--            </div>-->
-<!--            <div class="bt">-->
-<!--                <button>name</button>-->
-<!--            </div>-->
-<!--            <div class="bt">-->
-<!--                <button>name</button>-->
-<!--            </div>-->
-<!--            <div class="bt">-->
-<!--                <button>name</button>-->
-<!--            </div>-->
-<!--            <div class="bt">-->
-<!--                <button>name</button>-->
-<!--            </div>-->
-<!--            <div class="bt">-->
-<!--                <button>name</button>-->
-<!--            </div>-->
-<!--            <div class="bt">-->
-<!--                <button>name</button>-->
-<!--            </div>-->
-<!--        </div>-->
-    </div>
+</div>
+
+<div class="right">
+    <div>任务列表</div>
+    <ul id="taskul">
+    </ul>
+</div>
 <script>
+    setInterval(updatataskshow,3000)
     function doFun(url){
         axios.get(url)
-            .then()
+            .then((re)=>{
+                if (re.data.code===20000)
+                    alert("已提交任务")
+                else
+                    alert(re.data.msg)
+                updatataskshow()
+            })
     }
+    function updatataskshow(){
+        axios.get("/taskall").then((re)=>{
+        document.getElementById("taskul").innerHTML=re.data.data.reduce((a,b)=>{
+           return `${a}\n<li>${b}</li>`
+        },"")
+    })
+    }
+
 </script>
 </body>
 </html>
