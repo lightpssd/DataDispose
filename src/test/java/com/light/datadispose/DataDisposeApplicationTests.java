@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.File;
+import java.util.Properties;
+
 @SpringBootTest
 class DataDisposeApplicationTests {
 
@@ -17,7 +20,12 @@ class DataDisposeApplicationTests {
 
     @Test
     void contextLoads() {
-        testFunService.test1();
+        File file = new File("file:///C:/Users/Light/Desktop/桌面项目集合/DataDispose/fDCAMgZ9aJblihUloTD3H6744241734210044573.png");
+        Properties properties = System.getProperties();
+        properties.entrySet().forEach(b->{
+            System.out.println(b.getKey()+":"+b.getValue());
+        });
+
     }
 
 }
