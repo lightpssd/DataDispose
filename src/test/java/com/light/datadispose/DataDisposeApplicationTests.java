@@ -18,13 +18,10 @@ class DataDisposeApplicationTests {
     @Autowired
     TestFunService testFunService;
 
+
+
     @Test
     void contextLoads() {
-        File file = new File("file:///C:/Users/Light/Desktop/桌面项目集合/DataDispose/fDCAMgZ9aJblihUloTD3H6744241734210044573.png");
-        Properties properties = System.getProperties();
-        properties.entrySet().forEach(b->{
-            System.out.println(b.getKey()+":"+b.getValue());
-        });
 
     }
 

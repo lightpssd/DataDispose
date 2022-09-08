@@ -34,9 +34,7 @@ class uploadControllr(
             TODO()
         }.let {
             com.light.datadispose.model.Result.ok().apply {
-                
-                TODO("不能在后端加static，后面会麻烦，修改前端")
-                data = staticPath.replace("/**","")+tempAppdir+"/"+it.name
+                data = tempAppdir+"/"+it.name
                 msg = "成功！"
             }
         }
