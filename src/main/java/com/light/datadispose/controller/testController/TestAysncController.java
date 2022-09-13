@@ -1,17 +1,14 @@
 package com.light.datadispose.controller.testController;
 
 import com.light.datadispose.lightAnnotation.ShowFunAble;
-import com.light.datadispose.model.Result;
+import com.light.datadispose.model.MyResult;
 import com.light.datadispose.service.funService.TestFunService;
-import com.light.datadispose.utils.FunRunningUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Currency;
-import java.util.Set;
 import java.util.function.Consumer;
 
 @RestController
@@ -28,9 +25,9 @@ public class TestAysncController {
 
     @ShowFunAble(name="测试功能标题",description = "测试功能")
     @GetMapping("/1")
-    public Result test1(){
+    public MyResult test1(){
         isRunning.accept("com.light.datadispose.service.funService.TestFunService.test1");
         ts.test1();
-        return Result.ok();
+        return MyResult.ok();
     }
 }

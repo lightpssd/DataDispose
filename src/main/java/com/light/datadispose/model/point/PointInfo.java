@@ -1,5 +1,7 @@
 package com.light.datadispose.model.point;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -16,11 +18,22 @@ public class PointInfo implements Serializable {
     @Serial
     private static final long serialVersionUID = 209803534084800371L;
 
-    @TableId
+    @Override
+    public String toString() {
+        return "PointInfo{" +
+                "id=" + id +
+                ", key='" + key + '\'' +
+                ", value='" + value + '\'' +
+                ", pointId='" + pointId + '\'' +
+                '}';
+    }
+
+    @TableId(type = IdType.AUTO)
     private Integer id;
-    
+
+    @TableField("`key`")
     private String key;
-    
+    @TableField("`value`")
     private String value;
     
     private String pointId;

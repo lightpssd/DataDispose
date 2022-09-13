@@ -1,7 +1,9 @@
 package com.light.datadispose.model.point;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonAlias;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -36,13 +38,44 @@ public class Point implements Serializable {
      * 高
      */
     private Integer height;
-    
-    private Integer isround;
-    
+
+
+
+    private Boolean isRound;
+
+    @JsonAlias("show_image")
     private String showImage;
-    
+    @JsonAlias("icon_image")
     private String iconImage;
+
+    @Override
+    public String toString() {
+        return "Point{" +
+                "id='" + id + '\'' +
+                ", axis=" + axis +
+                ", ayis=" + ayis +
+                ", width=" + width +
+                ", height=" + height +
+                ", isRound=" + isRound +
+                ", showImage='" + showImage + '\'' +
+                ", iconImage='" + iconImage + '\'' +
+                ", type=" + type +
+                ", deptId=" + deptId +
+                ", points=" + points +
+                '}';
+    }
+
     private Integer type;
+
+    public Integer getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
+    }
+
+    private Integer deptId;
 
     public Integer getType() {
         return type;
@@ -52,15 +85,16 @@ public class Point implements Serializable {
         this.type = type;
     }
 
-    public List<Point> getPoints() {
+    public List<PointInfo> getPoints() {
         return points;
     }
 
-    public void setPoints(List<Point> points) {
+    public void setPoints(List<PointInfo> points) {
         this.points = points;
     }
 
-    private List<Point> points;
+    @TableField(exist = false)
+    private List<PointInfo> points;
 
     public String getId() {
         return id;
@@ -102,12 +136,12 @@ public class Point implements Serializable {
         this.height = height;
     }
 
-    public Integer getIsround() {
-        return isround;
+    public Boolean getIsRound() {
+        return isRound;
     }
 
-    public void setIsround(Integer isround) {
-        this.isround = isround;
+    public void setIsRound(Boolean isRound) {
+        this.isRound = isRound;
     }
 
     public String getShowImage() {

@@ -1,16 +1,12 @@
 package com.light.datadispose.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-public class Result {
+public class MyResult {
 
     private StateCode code;
     private String msg;
     private Object data;
 
-    public Result() {
+    public MyResult() {
     }
 
     public StateCode getCode() {
@@ -21,7 +17,7 @@ public class Result {
         this.code = code;
     }
 
-    public Result(StateCode code, String msg, Object data) {
+    public MyResult(StateCode code, String msg, Object data) {
         this.code = code;
         this.msg = msg;
         this.data = data;
@@ -46,10 +42,13 @@ public class Result {
 
 
 
-    public static Result ok(){
-        return new Result(StateCode.OK,null,null);
+    public static MyResult ok(){
+        return new MyResult(StateCode.OK,null,null);
     }
-    public static Result FunRunningError(){
-        return new Result(StateCode.FUNRUNNING,"该功能正在运行中",null);
+    public static MyResult FunRunningError(){
+        return new MyResult(StateCode.FUNRUNNING,"该功能正在运行中",null);
+    }
+    public static MyResult SQLInsertError(){
+        return new MyResult(StateCode.FUNRUNNING,"服务器忙碌",null);
     }
 }

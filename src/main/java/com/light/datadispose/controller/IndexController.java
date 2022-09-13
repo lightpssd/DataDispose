@@ -1,6 +1,6 @@
 package com.light.datadispose.controller;
 
-import com.light.datadispose.model.Result;
+import com.light.datadispose.model.MyResult;
 import com.light.datadispose.model.ShowFun;
 import com.light.datadispose.model.StateCode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -31,8 +30,8 @@ public class IndexController{
     }
     @GetMapping("/taskall")
     @ResponseBody
-    public Result taskList(){
-        return new Result(StateCode.OK,"",stringSet);
+    public MyResult taskList(){
+        return new MyResult(StateCode.OK,"",stringSet);
     }
 
 

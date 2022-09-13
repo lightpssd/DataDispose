@@ -1,6 +1,6 @@
 package com.light.datadispose.Exception;
 
-import com.light.datadispose.model.Result;
+import com.light.datadispose.model.MyResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class FunRunningExceptionHandler {
 
     @ExceptionHandler(FunRunningException.class)
-    public Result handleAuthorizationException(Exception e) {
+    public MyResult handleAuthorizationException(Exception e) {
 
-        return Result.FunRunningError();
+        return MyResult.FunRunningError();
     }
 
 }

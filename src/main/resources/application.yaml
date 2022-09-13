@@ -19,6 +19,11 @@ spring:
           username: light
           password: 12345
           url: jdbc:mysql://180.76.179.65/cloudnote
+        point:
+          type: com.alibaba.druid.pool.DruidDataSource
+          username: light
+          password: 12345
+          url: jdbc:mysql://180.76.179.65/Test
   mvc:
     static-path-pattern: /static/**
   web:
@@ -35,6 +40,9 @@ logging:
 debug: false
 
 
-
+staticPrefix: /static
 uploadFileDir: D:/DataDispose
 tempUploadFileDir: /temp
+imageDir: /image
+
+
