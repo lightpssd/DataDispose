@@ -30,7 +30,7 @@ fun saveFile(file: MultipartFile,fileName:String,base:String,vararg dir:String)=
     (Path(base,*dir).createDirectories()/fileName).apply {
         file.transferTo(this)
     }.toFile()
-}
+}.getOrNull()
 
 
 

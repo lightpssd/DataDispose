@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -43,9 +44,11 @@ public class Point implements Serializable {
 
     private Boolean isRound;
 
-    @JsonAlias("show_image")
+
+    @JsonProperty("show_image")
     private String showImage;
-    @JsonAlias("icon_image")
+
+    @JsonProperty("icon_image")
     private String iconImage;
 
     @Override

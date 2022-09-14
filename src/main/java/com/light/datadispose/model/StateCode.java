@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum StateCode {
     OK(20000),
-    FUNRUNNING(30001)
+    FUNRUNNING(30001),
+
+    STANDARDERROR(30000)
     ;
 
     @JsonValue

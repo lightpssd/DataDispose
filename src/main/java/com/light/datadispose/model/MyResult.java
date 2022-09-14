@@ -48,7 +48,7 @@ public class MyResult {
     public static MyResult FunRunningError(){
         return new MyResult(StateCode.FUNRUNNING,"该功能正在运行中",null);
     }
-    public static MyResult SQLInsertError(){
-        return new MyResult(StateCode.FUNRUNNING,"服务器忙碌",null);
+    public static MyResult Error(){
+        return new MyResult(StateCode.STANDARDERROR,"服务器忙碌",null);
     }
 }
