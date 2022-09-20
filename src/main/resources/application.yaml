@@ -1,5 +1,9 @@
 
+server:
+  port: 7070
+
 spring:
+
   servlet:
     multipart:
       max-file-size: 10MB
@@ -10,20 +14,20 @@ spring:
       strict: false
       datasource:
         master:
-          type: com.alibaba.druid.pool.DruidDataSource
-          username: light
-          password: 12345
-          url: jdbc:mysql://180.76.179.65/newDay
-        note:
-          type: com.alibaba.druid.pool.DruidDataSource
-          username: light
-          password: 12345
-          url: jdbc:mysql://180.76.179.65/cloudnote
+          type: com.alibaba.druid.pool.DruidDataSource  #代表使用druid类型的数据源
+          username: root
+          password: jsjk*888
+          url: jdbc:mysql://192.9.200.50:3306/strongest_information_database?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+#        note:
+#          type: com.alibaba.druid.pool.DruidDataSource
+#          username: light
+#          password: 12345
+#          url: jdbc:mysql://180.76.179.65/cloudnote
         point:
-          type: com.alibaba.druid.pool.DruidDataSource
-          username: light
-          password: 12345
-          url: jdbc:mysql://180.76.179.65/Test
+          type: com.alibaba.druid.pool.DruidDataSource  #代表使用druid类型的数据源
+          username: root
+          password: jsjk*888
+          url: jdbc:mysql://192.9.200.50:3306/strongest_information_database?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
   mvc:
     static-path-pattern: /static/**
   web:

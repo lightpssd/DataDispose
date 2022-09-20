@@ -29,6 +29,7 @@ public class BeanConfig {
 
     @Bean("controllerShowList")
     public List<ShowFun> cShowFun(){
+        System.out.println("GHH");
         return FunUrlUtil.controllerShowList;
     }
 

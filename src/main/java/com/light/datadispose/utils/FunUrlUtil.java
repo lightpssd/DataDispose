@@ -11,6 +11,7 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+
 public class FunUrlUtil {
     private static final String packName="com.light.datadispose.controller";
 
@@ -82,6 +83,7 @@ public class FunUrlUtil {
             showFun.setShowFuns(subUrls);
             return showFun;
         }).filter(Objects::nonNull).toList();
+        System.out.println("GHH"+showFuns);
         return showFuns;
     }
 

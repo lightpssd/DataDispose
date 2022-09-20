@@ -15,7 +15,7 @@
     <description>DataDispose</description>
     <properties>
         <java.version>17</java.version>
-        <kotlin.version>1.7.20-Beta</kotlin.version>
+        <kotlin.version>1.6.10</kotlin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -118,6 +118,7 @@
 
     <build>
         <sourceDirectory>src/main/kotlin</sourceDirectory>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -147,7 +148,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <jvmTarget>1.8</jvmTarget>
+                    <jvmTarget>17</jvmTarget>
                 </configuration>
             </plugin>
             <plugin>

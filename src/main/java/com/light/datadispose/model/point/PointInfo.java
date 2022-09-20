@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
-import java.io.Serial;
+
 import java.io.Serializable;
 
 /**
@@ -15,7 +15,7 @@ import java.io.Serializable;
 
 @TableName("point_info")
 public class PointInfo implements Serializable {
-    @Serial
+
     private static final long serialVersionUID = 209803534084800371L;
 
     @Override
