@@ -52,7 +52,6 @@ class PointInfoController(
             points.forEach {
                 it.pointId = id
             }
-
             if (iconImage.startsWith(tempAppdir)) {
                 iconImage = "/" + Path(AppDir).relativize(
                     iconImage?.let {

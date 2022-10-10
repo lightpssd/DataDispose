@@ -67,7 +67,7 @@ public class Point implements Serializable {
                 ", points=" + points +
                 '}';
     }
-
+    
     private Integer type;
 
     public Integer getDeptId() {
