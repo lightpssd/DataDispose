@@ -46,13 +46,14 @@ class PointInfoController(
 ) {
     @PostMapping("/{id}")
     fun uploadInfo(@RequestBody point: Point, @PathVariable("id") dId: Int) = kotlin.runCatching {
+
         //todo 文件删除和一些代码需要修改
         point.apply {
             deptId = dId
             points.forEach {
                 it.pointId = id
             }
-            if (iconImage.startsWith(tempAppdir)) {
+            if (iconImage.startsWith(tempAppdir)){
                 iconImage = "/" + Path(AppDir).relativize(
                     iconImage?.let {
                         Files.copy(
@@ -149,6 +150,7 @@ class PointInfoController(
 
     @GetMapping("deptimage/{id}")
     fun getDeptImage(@PathVariable("id") id:Int): MyResult? {
+
         return pdis.selectOne(QueryWrapper<PointDeptImage?>().eq("dept_id", id))?.let {
             return MyResult.ok().apply { data=imageDir+"/"+it.imagePath }
         }?:MyResult.Error()

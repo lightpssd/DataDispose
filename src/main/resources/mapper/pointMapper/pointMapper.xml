@@ -12,7 +12,7 @@
         <result property="showImage" column="show_image" jdbcType="VARCHAR"/>
         <result property="iconImage" column="icon_image" jdbcType="VARCHAR"/>
         <result property="isRound" column="is_round" jdbcType="INTEGER"/>
-        <result property="type" column="type" jdbcType="INTEGER"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
         <result property="deptId" column="dept_id" jdbcType="INTEGER"/>
         <collection property="points" javaType="ArrayList" ofType="com.light.datadispose.model.point.PointInfo"
                     column="id" select="getPointInfoByPointId">

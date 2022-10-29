@@ -28,11 +28,16 @@ spring:
           username: root
           password: jsjk*888
           url: jdbc:mysql://192.9.200.50:3306/strongest_information_database?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+        maintain:
+          type: com.alibaba.druid.pool.DruidDataSource  #代表使用druid类型的数据源
+          username: root
+          password: jsjk*888
+          url: jdbc:mysql://192.9.200.50:3306/maintain?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
   mvc:
     static-path-pattern: /static/**
   web:
     resources:
-      static-locations: classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, classpath:/public/ ,file:D:/DataDispose/
+      static-locations: classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, classpath:/public/ ,file:D:/DataDispose/,file:D:/upload/
 mybatis-plus:
   mapper-locations: ["classpath*:/mapper/**/*.xml"]
   configuration:
@@ -41,8 +46,8 @@ mybatis-plus:
 logging:
   file:
     path: log
-debug: false
 
+debug: false
 
 staticPrefix: /static
 uploadFileDir: D:/DataDispose

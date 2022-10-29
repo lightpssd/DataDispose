@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serial;
@@ -68,7 +69,7 @@ public class Point implements Serializable {
                 '}';
     }
     
-    private Integer type;
+    private String type;
 
     public Integer getDeptId() {
         return deptId;
@@ -80,11 +81,67 @@ public class Point implements Serializable {
 
     private Integer deptId;
 
-    public Integer getType() {
+    public Boolean getRound() {
+        return isRound;
+    }
+
+    public void setRound(Boolean round) {
+        isRound = round;
+    }
+
+    public String getEmployeeNo() {
+        return employeeNo;
+    }
+
+    public void setEmployeeNo(String employeeNo) {
+        this.employeeNo = employeeNo;
+    }
+
+    private String employeeNo;
+
+    public String getOnPostPerson() {
+        return onPostPerson;
+    }
+
+    public void setOnPostPerson(String onPostPerson) {
+        this.onPostPerson = onPostPerson;
+    }
+
+    private String onPostPerson;
+    private String dangerousInformation;
+    private String changePointId;
+
+    public String getHistoricalPointId() {
+        return historicalPointId;
+    }
+
+    public void setHistoricalPointId(String historicalPointId) {
+        this.historicalPointId = historicalPointId;
+    }
+
+    private String historicalPointId;
+
+    public String getChangePointId() {
+        return changePointId;
+    }
+
+    public void setChangePointId(String changePointId) {
+        this.changePointId = changePointId;
+    }
+
+    public String getDangerousInformation() {
+        return dangerousInformation;
+    }
+
+    public void setDangerousInformation(String dangerousInformation) {
+        this.dangerousInformation = dangerousInformation;
+    }
+
+    public String getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(String type) {
         this.type = type;
     }
 
