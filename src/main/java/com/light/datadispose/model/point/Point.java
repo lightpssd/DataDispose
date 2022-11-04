@@ -3,8 +3,6 @@ package com.light.datadispose.model.point;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serial;
@@ -45,6 +43,55 @@ public class Point implements Serializable {
 
     private Boolean isRound;
 
+    private Boolean outerBorder;
+    private String outerBorderColor;
+    private Boolean lightStyle;
+
+    private Boolean tipActive;
+    private String tipText;
+
+    public Boolean getOuterBorder() {
+        return outerBorder;
+    }
+
+    public void setOuterBorder(Boolean outerBorder) {
+        this.outerBorder = outerBorder;
+    }
+
+    public String getOuterBorderColor() {
+        return outerBorderColor;
+    }
+
+    public void setOuterBorderColor(String outerBorderColor) {
+        this.outerBorderColor = outerBorderColor;
+    }
+
+    public Boolean getLightStyle() {
+        return lightStyle;
+    }
+
+    public void setLightStyle(Boolean lightStyle) {
+        this.lightStyle = lightStyle;
+    }
+
+    public Boolean getTipActive() {
+        return tipActive;
+    }
+
+    public void setTipActive(Boolean tipActive) {
+        this.tipActive = tipActive;
+    }
+
+    public String getTipText() {
+        return tipText;
+    }
+
+    public void setTipText(String tipText) {
+        this.tipText = tipText;
+    }
+
+
+
 
     @JsonProperty("show_image")
     private String showImage;
@@ -81,13 +128,6 @@ public class Point implements Serializable {
 
     private Integer deptId;
 
-    public Boolean getRound() {
-        return isRound;
-    }
-
-    public void setRound(Boolean round) {
-        isRound = round;
-    }
 
     public String getEmployeeNo() {
         return employeeNo;

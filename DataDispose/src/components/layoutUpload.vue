@@ -343,7 +343,7 @@ function handleChange(file, fileList) {
   height: 100%;
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  border: 1px #00ff00 solid;
+  /*border: 1px #00ff00 solid;*/
 }
 
 .update {

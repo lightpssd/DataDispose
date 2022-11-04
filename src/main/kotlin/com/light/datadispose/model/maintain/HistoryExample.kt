@@ -97,6 +97,11 @@ class HistoryExample : Serializable {
      */
     var countermeasure: String? = null
 
+    /**
+     * 图片
+     */
+    var photoPath:String?=null
+
     override fun toString(): String {
         return "HistoryExample{" +
         "id=" + id +

@@ -53,5 +53,6 @@ staticPrefix: /static
 uploadFileDir: D:/DataDispose
 tempUploadFileDir: /temp
 imageDir: /image
+defaultImageDir: /defaultImage
 
 

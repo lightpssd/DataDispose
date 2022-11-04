@@ -4,11 +4,17 @@
                    @clicked="onActivated(item,index)" :w="item.width / sf" :h="item.height/sf" :x="item.axis/sf"
                    :y="item.ayis/sf"
                    :parentLimitation="true" :minw="10" :minh="10" :isActive="item.isActive">
-      <div class="bt" draggable="true" :style="{
+      <el-tooltip  effect="light" :content="item.tipText" placement="right-end"  :disabled="!item.tipActive">
+      <div class="upload_bt"
+           :class="{
+             upload_bt_light:item.lightStyle
+           }" draggable="true" :style="{
         'background-image': `url(/static${item.icon_image})`,
         'border-radius': item.isRound?'50%':0,
+        'border': item.outerBorder?`1px ${item.outerBorderColor} solid`:'0',
         }">
       </div>
+      </el-tooltip>
 <!--      <el-avatar class="bt" :shape="item.isRound?'square':'circle'"  :src="'/static'+item.icon_image" />-->
     </VueDragResize>
   </div>
@@ -17,6 +23,7 @@
 
       <el-button type="primary" @click="submitForm(formRef)" plain>保存</el-button>
       <el-button type="primary" @click="addPoint">添加一个</el-button>
+
       <h3>基础信息</h3>
       <el-row>
         <el-col :span="6">
@@ -33,13 +40,13 @@
           <el-button type="danger" @click="deletePoint(formdata)">删除当前</el-button>
         </el-col>
       </el-row>
-      <el-row>
+      <el-row style="margin-top: 10px">
         <el-col :span="4" :push="1">
           <div class="block">
             <el-avatar :size="40" :src="'/static'+formdata.icon_image" fit="cover"/>
           </div>
         </el-col>
-        <el-col :span="4">
+        <el-col :span="3">
           <el-upload ref="upload" class="upload" :limit="1" action="/api/upload"
                      :on-success="iconuploadsuccess"
                      :on-change="handleChange"
@@ -48,26 +55,43 @@
             <el-button type="primary">更改图标</el-button>
           </el-upload>
         </el-col>
-        <el-col :span="6">
-          <el-form-item hide-required-asterisk required prop="type" label="默认图标" label-width="80px">
-            <el-select v-model="formdata.icon_image" class="select" placeholder="选择类型" size="small">
-              <el-option label="警示红" value="/example/警示红.png"/>
-              <el-option label="警示橙" value="/example/警示橙.png"></el-option>
-              <el-option label="危险橙" value="/example/危险橙.png"></el-option>
-              <el-option label="危险红" value="/example/危险红.png"></el-option>
-              <el-option label="危险黄" value="/example/危险黄.png"></el-option>
-              <el-option label="火灾红" value="/example/火灾红.png"></el-option>
-              <el-option label="火灾橙" value="/example/火灾橙.png"></el-option>
-            </el-select>
-          </el-form-item>
+        <el-col :span="7" >
+
+            <el-form-item hide-required-asterisk required prop="type" label="默认图标" label-width="80px">
+            <el-cascader
+                placeholder="选择类型"
+                size="small"
+                :options="options"
+                @change="(val)=>{formdata.icon_image=val.pop()}"></el-cascader>
+            </el-form-item>
+
+
         </el-col>
-        <el-col :span="6" :offset="2">
+        <el-col :span="3" :offset="1">
           <el-switch v-model="formdata.isRound" inactive-text="圆形"/>
         </el-col>
+        <el-col :span="3" >
+          <el-switch v-model="formdata.outerBorder" inactive-text="外框线"/>
+        </el-col>
+        <el-col :span="2">
+          <el-color-picker v-model="formdata.outerBorderColor" ></el-color-picker>
+        </el-col>
       </el-row>
-
+      <el-row style="height: 40px">
+        <el-col :span="4" :offset="4">
+          <el-switch v-model="formdata.lightStyle"  inactive-text="移入发光"/>
+        </el-col>
+        <el-col :span="4" >
+          <el-switch v-model="formdata.tipActive"  inactive-text="文字提示"/>
+        </el-col>
+        <el-col :span="10" v-if="formdata.tipActive">
+          <el-form-item prop="tipText" label="提示文字" label-width="80px" >
+            <el-input v-model="formdata.tipText"/>
+          </el-form-item>
+        </el-col>
+      </el-row>
       <el-row>
-        <el-col :span="10">
+        <el-col :span="10" style="margin-top: 5px">
           <el-form-item hide-required-asterisk prop="height" label="高度" label-width="80px" required>
             <el-input v-model="formdata.height"/>
           </el-form-item>
@@ -148,32 +172,7 @@
       </el-space>
 
       <el-scrollbar height="250px">
-<!--        <el-tabs>-->
 
-<!--        </el-tabs>-->
-<!--        <el-row v-for="(it,index) in formdata.points" :key="index">-->
-<!--          <el-col :span="10">-->
-<!--            <el-form-item hide-required-asterisk :prop="'points.'+index+'.key'" label="键" label-width="40px" :rules="{-->
-<!--                          required: true,-->
-<!--                          message: '不能为空',-->
-<!--                          trigger: 'blur',-->
-<!--                        }">-->
-<!--              <el-input autosize v-model="it.key"/>-->
-<!--            </el-form-item>-->
-<!--          </el-col>-->
-<!--          <el-col :span="10">-->
-<!--            <el-form-item hide-required-asterisk :prop="'points.'+index+'.value'" label="值" label-width="40px" :rules="{-->
-<!--                          required: true,-->
-<!--                          message: '不能为空',-->
-<!--                          trigger: 'blur',-->
-<!--                        }">-->
-<!--              <el-input autosize v-model="it.value"/>-->
-<!--            </el-form-item>-->
-<!--          </el-col>-->
-<!--          <el-col :span="2" :push="1">-->
-<!--            <el-button type="danger" :icon="Delete" circle @click.prevent="removeDomain(index)"></el-button>-->
-<!--          </el-col>-->
-<!--        </el-row>-->
       </el-scrollbar>
 
     </el-form>
@@ -195,7 +194,60 @@ const sf = 1920 / 1280;
 const route = useRoute()
 const loadingInstance = ElLoading.service({fullscreen: true, text: "加载布局图中"})
 
+const options=[
+  {
+    value:"警示",
+    label:"警示",
+    children:[
+      {
+        label:"警示红",
+        value:"/example/警示红.png"
+      },
+      {
+        label:"警示橙",
+        value:"/example/警示橙.png"
+      },
+    ]
+  },
+  {
+    value:"危险",
+    label:"危险",
+    children:[
+      {
+        label:"危险红",
+        value:"/example/危险红.png"
+      },
+      {
+        label:"危险橙",
+        value:"/example/危险橙.png"
+      },
+      {
+        label:"危险黄",
+        value:"/example/危险黄.png"
+      },
+    ]
+  },
+  {
+    value:"火灾",
+    label:"火灾",
+    children:[
 
+      {
+        label:"火灾橙",
+        value:"/example/火灾橙.png"
+      },
+      {
+        label:"火灾红",
+        value:"/example/火灾红.png"
+      },
+    ]
+  },
+]
+axios.get("/api/defimagelist").then((re)=>{
+  if (re.data.code===20000){
+    options.push(...re.data.data)
+  }
+})
 const re = [
 
 ]
@@ -356,6 +408,13 @@ function addPoint() {
       type:"1",
       historicalPointId:"",
       dangerousInformation:"",
+
+      outerBorder:true,
+      outerBorderColor:'#6cf',
+      lightStyle:false,
+      tipActive:false,
+      tipText:"",
+
       changePointId:"",
       icon_image: "/example/1661928324865.png",
       points: [],
@@ -388,13 +447,17 @@ function handleChange(file, fileList) {
 }
 </script>
 <style scoped>
-.bt {
+.upload_bt {
   /*border-radius: 50%;*/
   width: 100%;
   height: 100%;
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  border: 1px #00ff00 solid;
+
+}
+.upload_bt_light:hover{
+  box-shadow:  0 0 60px #39c5bb inset;
+  transition: box-shadow 0.3s ease;
 }
 
 .update {
@@ -416,4 +479,5 @@ function handleChange(file, fileList) {
   height: 720px;
   background-color: rgb(121, 229, 244);
 }
+
 </style>

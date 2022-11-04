@@ -4,11 +4,16 @@
                    @clicked="onActivated(item,index)" :w="item.width" :h="item.height" :x="item.axis"
                    :y="item.ayis" :isActive="false" :isDraggable="false" :isResizable="false"
                    :minw="10" :minh="10">
-      <div class="bt" :style="{
+      <el-tooltip  effect="light" :content="item.tipText" placement="right-end"  :disabled="!item.tipActive">
+      <div class="bt" :class="{
+             upload_bt_light:item.lightStyle
+           }" :style="{
         'background-image': `url(/static${item.icon_image})`,
         'border-radius': item.isRound?'50%':0,
+         'border': item.outerBorder?`1px ${item.outerBorderColor} solid`:'0',
         }">
       </div>
+      </el-tooltip>
       <!--      <el-popover placement="top-start" title="Title" :width="200" trigger="hover">-->
       <!--        <template #reference>-->
       <!--          <div class="bt" :style="item.style" draggable="true">-->
@@ -380,7 +385,11 @@ function onActivated(item, index) {
   height: 100%;
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  border: 1px #00ff00 solid;
+  /*border: 1px #00ff00 solid;*/
+}
+.upload_bt_light:hover{
+  box-shadow:  0 0 60px #39c5bb inset;
+  transition: box-shadow 0.3s ease;
 }
 
 .update {
