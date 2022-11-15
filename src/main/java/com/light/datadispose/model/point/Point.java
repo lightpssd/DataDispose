@@ -54,6 +54,44 @@ public class Point implements Serializable {
 
     private String hazardSourceId;
 
+    private Integer fontSize;
+    private String fontColor;
+    private String fontFamily;
+
+    private String text;
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Integer getFontSize() {
+        return fontSize;
+    }
+
+    public void setFontSize(Integer fontSize) {
+        this.fontSize = fontSize;
+    }
+
+    public String getFontColor() {
+        return fontColor;
+    }
+
+    public void setFontColor(String fontColor) {
+        this.fontColor = fontColor;
+    }
+
+    public String getFontFamily() {
+        return fontFamily;
+    }
+
+    public void setFontFamily(String fontFamily) {
+        this.fontFamily = fontFamily;
+    }
+
     public String getDeviceInformationId(){
         return deviceInformationId;
     }
@@ -170,6 +208,7 @@ public class Point implements Serializable {
     private String onPostPerson;
     private String dangerousInformation;
     private String changePointId;
+
 
     public String getHistoricalPointId() {
         return historicalPointId;

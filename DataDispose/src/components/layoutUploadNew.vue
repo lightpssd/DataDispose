@@ -3,9 +3,12 @@
 
   <div class="update" :style="backinfo">
     <VueDragResize class="drag" v-for="(item,index) in  info" :key="item.id" v-on:dragging="resize" @resizing="resize"
-                   @clicked="onActivated(item,index)" :w="item.width / sf" :h="item.height/sf" :x="item.axis/sf"
+                   @clicked="onActivated(item,index)" :w="item.width/sf" :h="item.height/sf" :x="item.axis/sf"
                    :y="item.ayis/sf"
-                   :parentLimitation="true" :minw="10" :minh="10" :isActive="item.isActive">
+                   :parentLimitation="true" :minw="10" :minh="10" :isActive="item.isActive"
+                   :style="{
+                     'z-index':item.type==='7'?1:10
+                   }">
       <el-tooltip  effect="light" :content="item.tipText" placement="right-end"  :disabled="!item.tipActive">
       <div class="upload_bt"
            :class="{
@@ -14,21 +17,30 @@
         'background-image': `url(/static${item.icon_image})`,
         'border-radius': item.isRound?'50%':0,
         'border': item.outerBorder?`1px ${item.outerBorderColor} solid`:'0',
-        }">
+        }" v-if="item.type!=='8'" >
+
       </div>
+        <div style="text-align: center;" :style="{
+          'line-height':item.height/sf+'px',
+          'font-size':item.fontSize+'pt',
+          'color':item.fontColor,
+'font-family':item.fontFamily
+        }"
+             v-if="item.type==='8'">
+          {{item.text}}
+        </div>
       </el-tooltip>
 <!--      <el-avatar class="bt" :shape="item.isRound?'square':'circle'"  :src="'/static'+item.icon_image" />-->
     </VueDragResize>
   </div>
   <div class="info" v-if="formdata!=null" >
     <el-form ref="formRef" :model="formdata" label-position="right" label-width="120px" class="demo-dynamic">
-
-      <el-button type="primary" @click="submitForm(formRef)" plain>保存</el-button>
-      <el-button type="primary" @click="addPoint">添加一个</el-button>
-
-      <h3>基础信息</h3>
       <el-row>
-        <el-col :span="6">
+
+        <el-col :span="4">
+          <el-button type="primary" @click="addPoint">添加一个</el-button>
+        </el-col>
+        <el-col :span="3">
           <el-upload class="upload" :action="'/api/point/deptimage/'+route.params.id"
                      :limit="1"
                      :show-file-list="false"
@@ -37,6 +49,15 @@
           >
             <el-button type="primary">科室底图</el-button>
           </el-upload>
+        </el-col>
+      </el-row>
+
+
+
+      <h3>基础信息</h3>
+      <el-row>
+        <el-col :span="3">
+          <el-button type="primary" @click="submitForm(formRef)" plain>保存</el-button>
         </el-col>
         <el-col :span="6">
           <el-button type="danger" @click="deletePoint(formdata)">删除当前</el-button>
@@ -76,7 +97,7 @@
           <el-switch v-model="formdata.outerBorder" inactive-text="外框线"/>
         </el-col>
         <el-col :span="2">
-          <el-color-picker v-model="formdata.outerBorderColor" ></el-color-picker>
+          <el-color-picker v-model="formdata.outerBorderColor"  show-alpha></el-color-picker>
         </el-col>
       </el-row>
       <el-row style="height: 40px">
@@ -95,24 +116,24 @@
       <el-row>
         <el-col :span="10" style="margin-top: 5px">
           <el-form-item hide-required-asterisk prop="height" label="高度" label-width="80px" required>
-            <el-input v-model="xy.height" @blur="rexy(xy)"/>
+            <el-input-number  type="number" :step="2" v-model="xy.height" @blur="rexy(xy)" @change="rexy(xy)"/>
           </el-form-item>
         </el-col>
         <el-col :span="10" style="margin-top: 5px">
-          <el-form-item hide-required-asterisk prop="width" label="宽度" label-width="80px" required>
-            <el-input v-model="xy.width" @blur="rexy(xy)"/>
+          <el-form-item hide-required-asterisk prop="width" label="宽度" label-width="80px" type="number " required>
+            <el-input-number  type="number" :step="2" v-model="xy.width" @blur="rexy(xy)" @change="rexy(xy)"/>
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="10" style="margin-top: 5px">
           <el-form-item hide-required-asterisk prop="axis" label="横坐标" label-width="80px" required>
-            <el-input v-model="xy.axis" @blur="rexy(xy)"/>
+            <el-input-number  type="number" :step="2" v-model="xy.axis" @blur="rexy(xy)" @change="rexy(xy)"/>
           </el-form-item>
         </el-col>
         <el-col :span="10" style="margin-top: 5px">
           <el-form-item hide-required-asterisk  prop="ayis" label="纵坐标" label-width="80px" required>
-            <el-input  v-model="xy.ayis" @blur="rexy(xy)"/>
+            <el-input-number  type="number" :step="2" v-model="xy.ayis" @blur="rexy(xy)" @change="rexy(xy)"/>
           </el-form-item>
         </el-col>
       </el-row>
@@ -127,13 +148,15 @@
 
         <el-col :span="24">
           <el-form-item hide-required-asterisk required prop="type" label="点位类型" label-width="80px">
-            <el-select v-model="formdata.type" class="select" placeholder="选择类型" size="small">
+            <el-select v-model="formdata.type" class="select" placeholder="选择类型" size="small" @change="componentTypeSelectHandle">
               <el-option label="人员" value="1"/>
               <el-option label="历史安全事故发生点" value="2"></el-option>
               <el-option label="变化点" value="3"></el-option>
               <el-option label="历史生产问题发生点" value="4"></el-option>
               <el-option label="加工设备" value="5"></el-option>
               <el-option label="危险源" value="6"></el-option>
+              <el-option label="文字" value="8"></el-option>
+              <el-option label="仅图标" value="7"></el-option>
             </el-select>
           </el-form-item>
 
@@ -173,6 +196,42 @@
           <el-input v-model="formdata.hazardSourceId"/>
         </el-form-item>
       </el-row>
+      <el-row v-if="formdata.type==='8'">
+        <el-form-item  hide-required-asterisk prop="text" label="文字" label-width="80px" required>
+          <el-input v-model="formdata.text" style="width: 350px" />
+        </el-form-item>
+        <el-form-item  hide-required-asterisk prop="fontFamily" label="字体" label-width="80px" required>
+          <el-select  v-model="formdata.fontFamily" class="select" placeholder="选择类型" size="small" >
+            <el-option label="宋体" value="宋体"/>
+            <el-option label="微软雅黑" value="微软雅黑"></el-option>
+            <el-option label="楷体" value="楷体"></el-option>
+            <el-option label="隶书" value="隶书"></el-option>
+            <el-option label="华文琥珀" value="华文琥珀"></el-option>
+            <el-option label="华文彩云" value="华文彩云"></el-option>
+            <el-option label="卡通" value="星辰温柔浪漫体"></el-option>
+            <el-option label="粗毛笔" value="平方飞扬体"></el-option>
+            <el-option label="细毛笔" value="汉仪瑞鹤"></el-option>
+            <el-option label="TimesNew Roman" value="TimesNew Roman"></el-option>
+            <el-option label="Arial Black" value="Arial Black"></el-option>
+            <el-option label="Calibri" value="Calibri"></el-option>
+            <el-option label="Meiryo UI" value="Meiryo UI"></el-option>
+            <el-option label="Algerian" value="Algerian"></el-option>
+            <el-option label="Blackadder ITC" value="Blackadder ITC"></el-option>
+            <el-option label="Edwardian Script ITC" value="Edwardian Script ITC"></el-option>
+            <el-option label="Jokerman" value="Jokerman"></el-option>
+            <el-option label="Wide Latin" value="Wide Latin"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-row>
+      <el-row v-if="formdata.type==='8'">
+        <el-form-item  hide-required-asterisk prop="fontSize" label="字体大小" label-width="80px" required>
+          <el-slider v-model="formdata.fontSize" :step="2" :max="100" show-stops style="width: 350px" />
+        </el-form-item>
+        <el-form-item  hide-required-asterisk prop="fontColor" label="字体颜色" label-width="80px" required>
+          <el-color-picker v-model="formdata.fontColor" show-alpha />
+        </el-form-item>
+      </el-row>
+
       <el-space v-if="formdata.type==='512'">
         <h3>
           自定义信息
@@ -202,6 +261,8 @@ import {Delete} from '@element-plus/icons-vue'
 import axios from "axios";
 import VueDragResize from "vue-drag-resize/src/components/vue-drag-resize.vue";
 import {useRouter, useRoute} from 'vue-router'
+import { computed} from 'vue'
+
 console.log(import.meta.env.VITE_MainMain_ADRESS)
 const formRef = ref(null)
 const upload = ref(null)
@@ -211,7 +272,9 @@ const route = useRoute()
 const loadingInstance = ElLoading.service({fullscreen: true, text: "加载布局图中"})
 const xy=reactive({
   ayis:0
+
 })
+
 const options=[
   {
     value:"警示",
@@ -274,7 +337,13 @@ var formdata = ref(null)
 
 
 function rexy(val){
-  Object.assign(formdata.value,val)
+
+  formdata.value.axis=val.axis
+  formdata.value.ayis=val.ayis
+  formdata.value.width=val.width
+  formdata.value.height=val.height
+
+  // Object.assign(formdata.value,val)
 }
 const backinfo=reactive({
   "background-image":"linear-gradient(red, yellow, blue)",
@@ -326,7 +395,21 @@ function resize(rec) {
   xy.height = rec.height * 1.5;
 
 }
+//选择点位类型时的类型回调
+const componentTypeSelectHandle= (val)=>{
+  if(val==='8' && formdata.value.text==="世界，never been so gentle"){
 
+    xy.height=60
+
+    formdata.value.height=60
+    setTimeout(()=>{
+      xy.width=900
+      formdata.value.width=900
+    },100)
+
+
+  }
+}
 function onActivated(item, index) {
 
   info.forEach(a => {
@@ -426,8 +509,8 @@ function addPoint() {
       isNew:true,
       axis: 900,
       ayis: 500,
-      width: 100,
-      height: 100,
+      width:72,
+      height: 72,
       employeeNo:"000000",
       isRound: true,
       show_image: "",
@@ -442,7 +525,10 @@ function addPoint() {
       lightStyle:false,
       tipActive:false,
       tipText:"",
-
+      fontSize:23,
+      fontColor:"#66ccff",
+      text:"世界，never been so gentle",
+      fontFamily:"宋体",
       changePointId:"",
       icon_image: "/example/1661928324865.png",
       points: [],
@@ -474,11 +560,13 @@ function handleChange(file, fileList) {
   }
 }
 </script>
-<style scoped>
+<style scoped >
+
 .upload_bt {
   /*border-radius: 50%;*/
   width: 100%;
   height: 100%;
+
   background-repeat: no-repeat;
   background-size: 100% 100%;
 
@@ -510,6 +598,7 @@ function handleChange(file, fileList) {
   width: 100%;
   height: 720px;
   background-color: rgb(121, 229, 244);
+
 }
 
 </style>

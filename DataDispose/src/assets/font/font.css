@@ -1,0 +1,22 @@
+@font-face {
+    font-family: '星辰温柔浪漫体';
+    /* 重命名字体名 */
+    src: url('./xingchenwenroulangmanti.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: '平方飞扬体';
+    /* 重命名字体名 */
+    src: url('./平方飞扬体.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: '汉仪瑞鹤';
+    /* 重命名字体名 */
+    src: url('./汉仪瑞鹤.ttf');
+    font-weight: normal;
+    font-style: normal;
+}

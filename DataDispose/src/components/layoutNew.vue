@@ -1,9 +1,14 @@
 <template xmlns="">
   <div class="update" :style="backinfo">
     <VueDragResize class="drag" v-for="(item,index) in  info" :key="item.id"
-                   @clicked="onActivated(item,index)" :w="item.width" :h="item.height" :x="item.axis"
+                   @clicked="onActivated(item,index)"
+                   :preventActiveBehavior="true"
+                   :w="item.width" :h="item.height" :x="item.axis"
                    :y="item.ayis" :isActive="false" :isDraggable="false" :isResizable="false"
-                   :minw="10" :minh="10">
+                   :minw="10" :minh="10" :style="{
+                     'z-index':item.type==='7'?1:10,
+                     'border':'none'
+                   }">
       <el-tooltip  effect="light" :content="item.tipText" placement="right-end"  :disabled="!item.tipActive">
       <div class="bt" :class="{
              upload_bt_light:item.lightStyle
@@ -11,8 +16,17 @@
         'background-image': `url(/static${item.icon_image})`,
         'border-radius': item.isRound?'50%':0,
          'border': item.outerBorder?`1px ${item.outerBorderColor} solid`:'0',
-        }">
+        }"  v-if="item.type!=='8'" >
       </div>
+        <div style="text-align: center;" :style="{
+          'line-height':item.height+'px',
+          'font-size':item.fontSize+'pt',
+          'color':item.fontColor,
+'font-family':item.fontFamily
+        }"
+             v-if="item.type==='8'">
+          {{item.text}}
+        </div>
       </el-tooltip>
       <!--      <el-popover placement="top-start" title="Title" :width="200" trigger="hover">-->
       <!--        <template #reference>-->
@@ -690,6 +704,7 @@ function datachange(item){
 
 }
 function onActivated(item, index) {
+  if(['7','8'].includes(item.type))return
   gridData.value = item.points
   showUrl.value = item.show_image
   showinfo.value=item
