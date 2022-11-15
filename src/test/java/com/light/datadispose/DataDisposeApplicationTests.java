@@ -3,6 +3,7 @@ package com.light.datadispose;
 import com.light.datadispose.mapper.point.PointMapper;
 import com.light.datadispose.model.point.Point;
 import com.light.datadispose.service.funService.TestFunService;
+import com.light.datadispose.service.maintain.IEqInfoService;
 import com.light.datadispose.service.point.PointInfoService;
 import com.light.datadispose.service.point.PointService;
 import org.junit.jupiter.api.Test;
@@ -25,18 +26,11 @@ class DataDisposeApplicationTests {
     @Autowired
     PointMapper pm;
 
+    @Autowired
+    IEqInfoService iq;
     @Test
     void contextLoads() {
-
-//        PointInfo pointInfo = new PointInfo();
-//        pointInfo.setKey("sadasd");
-//        pointInfo.setValue("asdas");
-//        pointInfo.setPointId("sadasd");
-//        pis.saveOrUpdate(pointInfo);
-        List<Point> allByDeptId = pm.findAllByDeptId(10);
-        System.out.println(allByDeptId);
-//        List<PointInfo> list = pis.list();
-//        System.out.println(list);
+        System.out.println(iq.getById(16));
     }
 
 }

@@ -1,4 +1,6 @@
 <template xmlns="">
+  <div class="master">
+
   <div class="update" :style="backinfo">
     <VueDragResize class="drag" v-for="(item,index) in  info" :key="item.id" v-on:dragging="resize" @resizing="resize"
                    @clicked="onActivated(item,index)" :w="item.width / sf" :h="item.height/sf" :x="item.axis/sf"
@@ -18,7 +20,7 @@
 <!--      <el-avatar class="bt" :shape="item.isRound?'square':'circle'"  :src="'/static'+item.icon_image" />-->
     </VueDragResize>
   </div>
-  <div class="info" v-if="formdata!=null">
+  <div class="info" v-if="formdata!=null" >
     <el-form ref="formRef" :model="formdata" label-position="right" label-width="120px" class="demo-dynamic">
 
       <el-button type="primary" @click="submitForm(formRef)" plain>保存</el-button>
@@ -41,7 +43,7 @@
         </el-col>
       </el-row>
       <el-row style="margin-top: 10px">
-        <el-col :span="4" :push="1">
+        <el-col :span="3" :push="1">
           <div class="block">
             <el-avatar :size="40" :src="'/static'+formdata.icon_image" fit="cover"/>
           </div>
@@ -52,12 +54,12 @@
                      :on-change="handleChange"
                      accept=".jpg,.png,.gif"
           >
-            <el-button type="primary">更改图标</el-button>
+            <el-button type="primary" size="small">更改图标</el-button>
           </el-upload>
         </el-col>
         <el-col :span="7" >
 
-            <el-form-item hide-required-asterisk required prop="type" label="默认图标" label-width="80px">
+            <el-form-item  label="默认图标" label-width="80px">
             <el-cascader
                 placeholder="选择类型"
                 size="small"
@@ -93,24 +95,24 @@
       <el-row>
         <el-col :span="10" style="margin-top: 5px">
           <el-form-item hide-required-asterisk prop="height" label="高度" label-width="80px" required>
-            <el-input v-model="formdata.height"/>
+            <el-input v-model="xy.height" @blur="rexy(xy)"/>
           </el-form-item>
         </el-col>
-        <el-col :span="10">
+        <el-col :span="10" style="margin-top: 5px">
           <el-form-item hide-required-asterisk prop="width" label="宽度" label-width="80px" required>
-            <el-input v-model="formdata.width"/>
+            <el-input v-model="xy.width" @blur="rexy(xy)"/>
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="10">
-          <el-form-item hide-required-asterisk prop="axis" label="纵坐标" label-width="80px" required>
-            <el-input v-model="formdata.axis"/>
+        <el-col :span="10" style="margin-top: 5px">
+          <el-form-item hide-required-asterisk prop="axis" label="横坐标" label-width="80px" required>
+            <el-input v-model="xy.axis" @blur="rexy(xy)"/>
           </el-form-item>
         </el-col>
-        <el-col :span="10">
-          <el-form-item hide-required-asterisk prop="ayis" label="横坐标" label-width="80px" required>
-            <el-input v-model="formdata.ayis"/>
+        <el-col :span="10" style="margin-top: 5px">
+          <el-form-item hide-required-asterisk  prop="ayis" label="纵坐标" label-width="80px" required>
+            <el-input  v-model="xy.ayis" @blur="rexy(xy)"/>
           </el-form-item>
         </el-col>
       </el-row>
@@ -127,9 +129,11 @@
           <el-form-item hide-required-asterisk required prop="type" label="点位类型" label-width="80px">
             <el-select v-model="formdata.type" class="select" placeholder="选择类型" size="small">
               <el-option label="人员" value="1"/>
-              <el-option label="危险点" value="2"></el-option>
+              <el-option label="历史安全事故发生点" value="2"></el-option>
               <el-option label="变化点" value="3"></el-option>
-              <el-option label="历史问题发生点" value="4"></el-option>
+              <el-option label="历史生产问题发生点" value="4"></el-option>
+              <el-option label="加工设备" value="5"></el-option>
+              <el-option label="危险源" value="6"></el-option>
             </el-select>
           </el-form-item>
 
@@ -145,7 +149,7 @@
         </el-form-item>
       </el-row>
       <el-row>
-        <el-form-item v-if="formdata.type==='2'" hide-required-asterisk prop="dangerousInformation" label="危险点ID" label-width="80px" required>
+        <el-form-item v-if="formdata.type==='2'" hide-required-asterisk prop="dangerousInformation" label="发生点ID" label-width="80px" required>
           <el-input v-model="formdata.dangerousInformation"/>
         </el-form-item>
       </el-row>
@@ -155,11 +159,21 @@
         </el-form-item>
       </el-row>
       <el-row>
-        <el-form-item v-if="formdata.type==='4'" hide-required-asterisk prop="historicalPointId" label="历史id" label-width="80px" required>
+        <el-form-item v-if="formdata.type==='4'" hide-required-asterisk prop="historicalPointId" label="发生点ID" label-width="80px" required>
           <el-input v-model="formdata.historicalPointId"/>
         </el-form-item>
       </el-row>
-      <el-space v-if="formdata.type==='5'">
+      <el-row>
+        <el-form-item v-if="formdata.type==='5'" hide-required-asterisk prop="deviceInformationId" label="设备信息ID" label-width="80px" required>
+          <el-input v-model="formdata.deviceInformationId"/>
+        </el-form-item>
+      </el-row>
+      <el-row>
+        <el-form-item v-if="formdata.type==='6'" hide-required-asterisk prop="hazardSourceId" label="危险源ID" label-width="80px" required>
+          <el-input v-model="formdata.hazardSourceId"/>
+        </el-form-item>
+      </el-row>
+      <el-space v-if="formdata.type==='512'">
         <h3>
           自定义信息
         </h3>
@@ -177,9 +191,11 @@
 
     </el-form>
   </div>
-
+  </div>
 </template>
 <script setup async>
+
+
 import {ElMessage, ElLoading} from 'element-plus';
 import {nextTick, reactive, ref} from 'vue'
 import {Delete} from '@element-plus/icons-vue'
@@ -193,7 +209,9 @@ const up2 = ref(null)
 const sf = 1920 / 1280;
 const route = useRoute()
 const loadingInstance = ElLoading.service({fullscreen: true, text: "加载布局图中"})
-
+const xy=reactive({
+  ayis:0
+})
 const options=[
   {
     value:"警示",
@@ -254,6 +272,10 @@ const re = [
 const info = reactive(re)
 var formdata = ref(null)
 
+
+function rexy(val){
+  Object.assign(formdata.value,val)
+}
 const backinfo=reactive({
   "background-image":"linear-gradient(red, yellow, blue)",
   "background-repeat": "no-repeat",
@@ -298,6 +320,11 @@ function resize(rec) {
   formdata.value.ayis = rec.top * 1.5;
   formdata.value.width = rec.width * 1.5;
   formdata.value.height = rec.height * 1.5;
+  xy.axis = rec.left * 1.5;
+  xy.ayis = rec.top * 1.5;
+  xy.width = rec.width * 1.5;
+  xy.height = rec.height * 1.5;
+
 }
 
 function onActivated(item, index) {
@@ -408,7 +435,8 @@ function addPoint() {
       type:"1",
       historicalPointId:"",
       dangerousInformation:"",
-
+      deviceInformationId:"",
+      hazardSourceId:"",
       outerBorder:true,
       outerBorderColor:'#6cf',
       lightStyle:false,
@@ -459,7 +487,10 @@ function handleChange(file, fileList) {
   box-shadow:  0 0 60px #39c5bb inset;
   transition: box-shadow 0.3s ease;
 }
-
+.master{
+  width: 1920px;
+  height: 720px;
+}
 .update {
   background-size: 100% 100%;
   background-color: aqua;
@@ -468,6 +499,7 @@ function handleChange(file, fileList) {
   height: 720px;
   margin: 0;
   padding: 0;
+
 }
 
 .info {

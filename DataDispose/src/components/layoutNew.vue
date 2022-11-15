@@ -36,7 +36,7 @@
       </el-tab-pane>
     </el-tabs >
     <el-tabs  style="min-height: 500px"  v-if="showinfo?.type==='2'" model-value="first" class="demo-tabs">
-      <el-tab-pane label="安全事故信息" name="first">
+      <el-tab-pane label="历史安全事故信息" name="first">
         <el-row class="danger-info">
           <el-col :span="5">
             <el-card class=""  shadow="never"> 发生时间 </el-card>
@@ -87,7 +87,7 @@
       </el-tab-pane>
     </el-tabs>
     <el-tabs  style="min-height: 500px"  v-if="showinfo?.type==='3'" model-value="first" class="demo-tabs">
-      <el-tab-pane label="安全事故信息" name="first">
+      <el-tab-pane label="变化点信息信息" name="first">
         <el-row class="danger-info">
           <el-col :span="5">
             <el-card class=""  shadow="never"> 工序 </el-card>
@@ -161,7 +161,6 @@
           </el-col>
         </el-row>
       </el-tab-pane>
-
     </el-tabs>
     <el-tabs  style="min-height: 500px"  v-if="showinfo?.type==='4'" model-value="first" class="demo-tabs">
       <el-tab-pane label="历史事故示例信息一" name="first">
@@ -290,6 +289,313 @@
         />
       </el-tab-pane>
     </el-tabs>
+    <el-tabs  style="min-height: 500px"  v-if="showinfo?.type==='5'" model-value="first" class="demo-tabs">
+      <el-tab-pane label="设备信息一" name="first">
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 设备编号 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.eqCode }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 设备名称 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.eqName }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 规格型号 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.model }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 现状 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.presentSituation }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 厂家 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.manufactor }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 日期 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.date }} </el-card>
+          </el-col>
+        </el-row>
+      </el-tab-pane>
+      <el-tab-pane label="设备信息二" name="second">
+
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 存放地点 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.address }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 盘点结果 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.invRes }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 是否处理 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.handle }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 处理结果 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.hanRes }} </el-card>
+          </el-col>
+        </el-row>
+
+
+
+      </el-tab-pane>
+
+    </el-tabs>
+    <el-tabs  style="min-height: 500px"  v-if="showinfo?.type==='6'" model-value="first" class="demo-tabs">
+      <el-tab-pane label="危险源信息一" name="first">
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 工序名称 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.process }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 序号 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.serialNo }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 危险源 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.hazard }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 风险 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.risk }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 对策 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.countermeasure }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 可能性 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.possibility }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 改善后预计可能性 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.impPoss }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 改善后可能性确认 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.cfmPoss }} </el-card>
+          </el-col>
+        </el-row>
+
+      </el-tab-pane>
+      <el-tab-pane label="危险源信息二" name="second">
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 频率 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.frequency }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 改善后预计频率 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.impFre }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 改善后频率确认 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.cfmFre }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 严重性 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.seriousness }} </el-card>
+          </el-col>
+        </el-row>
+
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 改善后预计严重性 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.impSerious }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 改善后严重性确认 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.cfmSerious }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 评价分 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.score }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 改善后预计评价分 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.impScore }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 改善后评价分确认 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.cfmScore }} </el-card>
+          </el-col>
+        </el-row>
+      </el-tab-pane>
+      <el-tab-pane label="危险源信息三" name="three">
+
+
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 风险等级 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.riskLevel }} </el-card>
+          </el-col>
+        </el-row>
+
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 改善后预计风险等级 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.impRiskLevel }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 改善后风险等级确认 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.cfmRiskLevel }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 责任人 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.personLiable }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 实施部门 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.impDept }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 完成期限 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.compTime }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 确认人 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.confirm }} </el-card>
+          </el-col>
+        </el-row>
+        <el-row class="danger-info">
+          <el-col :span="5">
+            <el-card class=""  shadow="never"> 备注 </el-card>
+          </el-col>
+          <el-col :span="18" :offset="1">
+            <el-card :span="16" shadow="hover"> {{ dangerinfo?.bz }} </el-card>
+          </el-col>
+        </el-row>
+
+
+      </el-tab-pane>
+
+    </el-tabs>
 
   </el-dialog>
 
@@ -366,8 +672,20 @@ function datachange(item){
 
   }
 
+  if (item?.type==="5"){
+    axios.get("/api/eqInfo?id="+item.deviceInformationId).then((re)=>{
+      if (re.data.code===20000)
+        dangerinfo.value=re.data.data
+    })
 
+  }
+  if (item?.type==="6"){
+    axios.get("/api/hazardSource?id="+item.hazardSourceId).then((re)=>{
+      if (re.data.code===20000)
+        dangerinfo.value=re.data.data
+    })
 
+  }
 
 
 }
@@ -423,5 +741,8 @@ function onActivated(item, index) {
 }
 .danger-info{
   margin-bottom: 10px;
+}
+.danger-info .el-card__body{
+  height: 18px
 }
 </style>

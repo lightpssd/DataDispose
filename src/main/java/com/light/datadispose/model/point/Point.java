@@ -50,6 +50,26 @@ public class Point implements Serializable {
     private Boolean tipActive;
     private String tipText;
 
+    private String deviceInformationId;
+
+    private String hazardSourceId;
+
+    public String getDeviceInformationId(){
+        return deviceInformationId;
+    }
+
+    public void setDeviceInformationId(String deviceInformationId){
+        this.deviceInformationId = deviceInformationId;
+    }
+
+    public String getHazardSourceId() {
+        return hazardSourceId;
+    }
+
+    public void setHazardSourceId(String hazardSourceId) {
+        this.hazardSourceId = hazardSourceId;
+    }
+
     public Boolean getOuterBorder() {
         return outerBorder;
     }
