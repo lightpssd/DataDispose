@@ -612,6 +612,176 @@
     </el-tabs>
 
   </el-dialog>
+  <el-dialog :draggable="true" :top="'32px'" custom-class="my-dialog"  title="ATGL工厂危险源" v-model="atgdialogTableVisible" width="1300px" @open="datachange(showinfo)" @opened="opendDialogEvent(dangerinfo)">
+
+    <el-tabs type="border-card" :stretch="true">
+      <el-tab-pane label="危险因素分析" name="first">
+        <template #label>
+        <span class="custom-tabs-label">
+          危险因素分析
+        </span>
+        </template>
+        <el-header class="dialog-header">
+
+          <el-row>
+            <el-col :span="7">
+              <el-space :size="30">
+                <label class="content-title">危险源名称:</label>
+                <label class="content-info">{{ dangerinfo?.hazardName }}</label>
+              </el-space>
+
+            </el-col>
+            <el-col :span="12">
+              <el-space :size="30">
+                <label class="content-title">管理责任部门:</label>
+                <label class="content-info">{{ dangerinfo?.manResDept }}</label>
+              </el-space>
+            </el-col>
+          </el-row>
+
+        </el-header>
+        <el-main class="tab-main">
+          <el-row class="tab-row" justify="center">
+            <el-col :span="11">
+              <div class="pdfview" id="pdf1" >加载中</div>
+            </el-col>
+            <el-col :span="1"></el-col>
+            <el-col :span="11" >
+              <el-image style="width: 100%; height: 600px" :src="`/static/${dangerinfo?.realPhoto}`" :fit="fit" />
+            </el-col>
+          </el-row>
+
+        </el-main>
+
+      </el-tab-pane>
+      <el-tab-pane label="应急预案及演练" name="second">
+        <template #label>
+        <span class="custom-tabs-label">
+          应急预案及演练
+        </span>
+        </template>
+        <el-header class="dialog-header">
+
+
+          <el-row>
+            <el-col :span="7">
+              <el-space :size="30">
+                <label class="content-title">危险源名称:</label>
+                <label class="content-info">{{ dangerinfo?.hazardName }}</label>
+              </el-space>
+
+            </el-col>
+            <el-col :span="12">
+              <el-space :size="30">
+                <label class="content-title">管理责任部门:</label>
+                <label class="content-info">{{ dangerinfo?.manResDept }}</label>
+              </el-space>
+            </el-col>
+          </el-row>
+
+        </el-header>
+        <el-main class="tab-main">
+          <el-row class="tab-row" justify="center">
+            <el-col :span="11">
+              <div class="pdfview" id="pdf2" >加载中</div>
+            </el-col>
+            <el-col :span="1"></el-col>
+            <el-col :span="11" >
+              <div class="pdfview" id="pdf3" >加载中</div>
+            </el-col>
+          </el-row>
+
+        </el-main>
+      </el-tab-pane>
+      <el-tab-pane label="安全操作规程" name="third">
+        <template #label>
+        <span class="custom-tabs-label">
+          安全操作规程
+        </span>
+        </template>
+        <el-header class="dialog-header">
+          <el-row>
+            <el-col :span="7">
+              <el-space :size="30">
+                <label class="content-title">危险源名称:</label>
+                <label class="content-info">{{ dangerinfo?.hazardName }}</label>
+              </el-space>
+
+            </el-col>
+            <el-col :span="12">
+              <el-space :size="30">
+                <label class="content-title">管理责任部门:</label>
+                <label class="content-info">{{ dangerinfo?.manResDept }}</label>
+              </el-space>
+            </el-col>
+          </el-row>
+
+        </el-header>
+        <el-main class="tab-main">
+
+        </el-main>
+      </el-tab-pane>
+      <el-tab-pane label="日常点检" name="fourth">
+        <template #label>
+        <span class="custom-tabs-label">
+         日常点检
+        </span>
+        </template>
+        <el-header class="dialog-header">
+
+
+          <el-row>
+            <el-col :span="7">
+              <el-space :size="30">
+                <label class="content-title">危险源名称:</label>
+                <label class="content-info">{{ dangerinfo?.hazardName }}</label>
+              </el-space>
+
+            </el-col>
+            <el-col :span="12">
+              <el-space :size="30">
+                <label class="content-title">管理责任部门:</label>
+                <label class="content-info">{{ dangerinfo?.manResDept }}</label>
+              </el-space>
+            </el-col>
+          </el-row>
+
+        </el-header>
+        <el-main class="tab-main">
+          <el-row class="tab-row" justify="center">
+            <div class="pdfview" id="pdf4" >加载中</div>
+          </el-row>
+        </el-main>
+      </el-tab-pane>
+      <el-tab-pane label="视频监控" name="six">
+        <template #label>
+        <span class="custom-tabs-label">
+         视频监控
+        </span>
+        </template>
+        <el-header class="dialog-header">
+          <el-row>
+            <el-col :span="7">
+              <el-space :size="30">
+                <label class="content-title">危险源名称:</label>
+                <label class="content-info">{{ dangerinfo?.hazardName }}</label>
+              </el-space>
+
+            </el-col>
+            <el-col :span="12">
+              <el-space :size="30">
+                <label class="content-title">管理责任部门:</label>
+                <label class="content-info">{{ dangerinfo?.manResDept }}</label>
+              </el-space>
+            </el-col>
+          </el-row>
+        </el-header>
+        <el-main>
+
+        </el-main>
+      </el-tab-pane>
+    </el-tabs>
+  </el-dialog>
 
 </template>
 <script setup async>
@@ -621,10 +791,12 @@ import {Delete} from '@element-plus/icons-vue'
 import axios from "axios";
 import VueDragResize from "vue-drag-resize/src/components/vue-drag-resize.vue";
 import {useRouter, useRoute} from 'vue-router'
+import pdf from "pdfobject";
 
 const route = useRoute()
 const loadingInstance = ElLoading.service({fullscreen: true, text: "加载布局图中"})
 const dialogTableVisible = ref(false)
+const atgdialogTableVisible = ref(false)
 
 const re = []
 const info = reactive(re)
@@ -660,6 +832,18 @@ axios.get("/api/point/" + route.params.id).then(
       loadingInstance.close()
     }
 )
+var options = {
+  pdfOpenParams: { scrollbar: '0', messages: '0', navpanes: '0',toolbar:'0' },
+};
+const opendDialogEvent=(item)=>{
+  console.log(item)
+  pdf.embed(`/static/${item.riskFactorPdf}`, "#pdf1",options);
+  pdf.embed(`/static/${item.contPlanPdf}`, "#pdf2",options);
+  pdf.embed(`/static/${item.drillReportPdf}`, "#pdf3",options);
+  pdf.embed(`/static/${item.spotCheckPdf}`, "#pdf4",options);
+
+}
+//对话框打开事件
 function datachange(item){
 
   if (item?.type==="2")
@@ -700,15 +884,33 @@ function datachange(item){
     })
 
   }
+  if (item?.type==="6"){
+    axios.get("/api/hazardSource?id="+item.hazardSourceId).then((re)=>{
+      if (re.data.code===20000)
+        dangerinfo.value=re.data.data
+    })
 
+  }
+  if (item?.type==="9"){
+    axios.get("/api/secEnv?id="+item.atgSecEnvId).then((re)=>{
+      if (re.data.code===20000)
+        dangerinfo.value=re.data.data
+    })
 
+  }
 }
 function onActivated(item, index) {
   if(['7','8'].includes(item.type))return
   gridData.value = item.points
   showUrl.value = item.show_image
   showinfo.value=item
-  dialogTableVisible.value = true
+  if (item.type==='9'){
+
+    atgdialogTableVisible.value=true
+  }else {
+    dialogTableVisible.value = true
+  }
+
 }
 </script>
 <style>
@@ -759,5 +961,37 @@ function onActivated(item, index) {
 }
 .danger-info .el-card__body{
   height: 18px
+}
+.content-title {
+  font-size: 17pt;
+}
+
+.content-info {
+  font-size: 17pt;
+}
+
+.custom-tabs-label {
+  font-size: 14pt;
+  font-family: 黑体, serif;
+}
+.tab-main{
+  padding: 0;
+  overflow-y: hidden;
+}
+.tab-row{
+  padding: 0;
+}
+.my-dialog>.el-dialog__body{
+
+  padding: 0;
+}
+.pdfview{
+  height: 610px;
+  width: 100%;
+}
+.dialog-header{
+
+  height: 50px;
+  vertical-align: top;
 }
 </style>

@@ -19,32 +19,5 @@ import kotlin.io.path.listDirectoryEntries
  * Project DataDispose
  **/
 fun main() {
-    Path("D:\\upload\\adasd").run {
-
-        listDirectoryEntries().map {
-            if (it.isDirectory() && it.listDirectoryEntries().count { !it.isDirectory() }!=0){
-                buildMap<String,Any> {
-                    this["label"]=it.fileName.toString()
-                    this["value"]=it.fileName.toString()
-                    this["children"]=it.listDirectoryEntries().filter { !it.isDirectory() }.map {
-                            buildMap {
-                                val label = it.fileName.toString().dropLastWhile { it != '.' }.removeSuffix(".")
-                                this["label"]= if(label.isEmpty())it.fileName.toString() else label
-                                this["value"]=Path("D:\\upload").relativize(it).toString().replace("\\","/")
-
-                            }
-
-                        }
-                    }
-                }
-            else{
-                buildMap {
-                    val label = it.fileName.toString().dropLastWhile { it != '.' }.removeSuffix(".")
-                    this["label"]= if(label.isEmpty())it.fileName.toString() else label
-                    this["value"]=Path("D:\\upload").relativize(it).toString().replace("\\","/")
-
-                }
-            }
-        }
-    }.let { println(it) }
+    Path("")
 }

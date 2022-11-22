@@ -157,6 +157,7 @@
               <el-option label="危险源" value="6"></el-option>
               <el-option label="文字" value="8"></el-option>
               <el-option label="仅图标" value="7"></el-option>
+              <el-option label="ATG工厂危险源" value="9"></el-option>
             </el-select>
           </el-form-item>
 
@@ -231,7 +232,11 @@
           <el-color-picker v-model="formdata.fontColor" show-alpha />
         </el-form-item>
       </el-row>
-
+      <el-row>
+        <el-form-item v-if="formdata.type==='9'" hide-required-asterisk prop="atgSecEnvId" label="ATG危险源ID" label-width="80px" required>
+          <el-input v-model="formdata.atgSecEnvId"/>
+        </el-form-item>
+      </el-row>
       <el-space v-if="formdata.type==='512'">
         <h3>
           自定义信息
@@ -529,6 +534,7 @@ function addPoint() {
       fontColor:"#66ccff",
       text:"世界，never been so gentle",
       fontFamily:"宋体",
+      atgSecEnvId:"",
       changePointId:"",
       icon_image: "/example/1661928324865.png",
       points: [],

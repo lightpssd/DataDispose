@@ -60,6 +60,16 @@ public class Point implements Serializable {
 
     private String text;
 
+    private Integer atgSecEnvId;
+
+    public Integer getAtgSecEnvId() {
+        return atgSecEnvId;
+    }
+
+    public void setAtgSecEnvId(Integer atgSecEnvId) {
+        this.atgSecEnvId = atgSecEnvId;
+    }
+
     public String getText() {
         return text;
     }

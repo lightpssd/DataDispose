@@ -9,6 +9,11 @@ export default defineConfig({
       '/static':"http://localhost:7070",
     }
   },
-  plugins: [vue()]
+  plugins: [vue(),
+
+  ],
+  define: {
+    'process.env': {}
+  },
 })
 

@@ -4,6 +4,7 @@ import com.light.datadispose.mapper.point.PointMapper;
 import com.light.datadispose.model.point.Point;
 import com.light.datadispose.service.funService.TestFunService;
 import com.light.datadispose.service.maintain.IEqInfoService;
+import com.light.datadispose.service.maintain.ISecEnvService;
 import com.light.datadispose.service.point.PointInfoService;
 import com.light.datadispose.service.point.PointService;
 import org.junit.jupiter.api.Test;
@@ -28,9 +29,12 @@ class DataDisposeApplicationTests {
 
     @Autowired
     IEqInfoService iq;
+
+    @Autowired
+    ISecEnvService SES;
     @Test
     void contextLoads() {
-        System.out.println(iq.getById(16));
+        System.out.println(SES.getById(16));
     }
 
 }
